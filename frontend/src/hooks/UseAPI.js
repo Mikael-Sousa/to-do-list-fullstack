@@ -31,4 +31,5 @@ export const deleteTasks = async (id) => {
         method: "delete",
         headers: { "Content-Type": "application/json" },
       });
+      fetchTasks()
   };

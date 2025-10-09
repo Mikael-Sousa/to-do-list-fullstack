@@ -2,7 +2,7 @@ import { useState } from "react";
 import { putTasks } from "../hooks/UseAPI";
 import vIcon from "../assets/v-icon.png";
 
-function TaskList({ tasks }) {
+function TaskList({tasks, onModal}) {
   const [icon, setIcon] = useState({});
 
   return (
@@ -16,7 +16,7 @@ function TaskList({ tasks }) {
               key={task.id}
             >
               <button
-                className="w-10 h-10 p-1 rounded-full bg-none border-2 border-black 
+                className="w-10 h-10 p-1 rounded-full bg-transparent border-2 border-black 
                     cursor-pointer flex justify-center items-center"
                 onClick={() => {
                   setIcon((prev) => ({ ...prev, [task.id]: vIcon }));
@@ -28,7 +28,10 @@ function TaskList({ tasks }) {
                 )}
               </button>
               <span>{task.text}</span>
-              <button className="w-10 h-10 flex items-center justify-center">
+              <button
+                className="w-10 h-10 flex justify-center items-center border-transparent caret-black
+              bg-transparent text-3xl mb-2"
+              onClick={() => onModal(task)}>
                 ...
               </button>
             </li>
