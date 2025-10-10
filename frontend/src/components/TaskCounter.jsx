@@ -20,7 +20,7 @@ function TaskCounter({ message, completed, total }) {
         </div>
         <button
           className="
-      w-1/10 flex items-center justify-center bg-[rgba(0,0,0,0.6)]
+      w-15 h-15 flex items-center justify-center bg-[rgba(0,0,0,0.6)]
       rounded-full"
           onClick={() => navigate("/create-task")}
         >

@@ -24,7 +24,8 @@ function App() {
       setTasks(data);
       setTotal(data.length);
       setMessage(messageFunction(data, completed, data.length));
-      console.log("Tasks:", data);
+      const completedCount = data.filter((t) => t.status !== "pending").length;
+      setCompleted(completedCount);
     };
     load();
   }, [completed, deleteClicked]);
@@ -34,6 +35,9 @@ function App() {
       t.id === taskId ? { ...t, status: newStatus } : t
     );
     setTasks(updatedTasks);
+    const completedCount = updatedTasks.filter((t) => t.status !== "pending").length;
+    setCompleted(completedCount);
+
   };
 
   return (

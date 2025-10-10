@@ -35,8 +35,8 @@ function Modal({ offModal, task, deleteClick, updateStatus }) {
         <button
           className="text-white bg-[rgba(109,4,179,0.8)] w-8/10 p-2.5 rounded-2xl
         text-2xl cursor-pointer"
-          onClick={() => {
-            putTasks(task.id, task.text, "dayOff");
+          onClick={async () => {
+            await putTasks(task.id, task.text, "dayOff");
             updateStatus(task.id, "dayOff");
             offModal();
           }}

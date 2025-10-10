@@ -34,8 +34,8 @@ function TaskList({ tasks, onModal, updateStatus }) {
               <button
                 className="w-10 h-10 p-1 rounded-full bg-transparent border-2 border-black 
                     cursor-pointer flex justify-center items-center"
-                onClick={() => {
-                  putTasks(task.id, task.text, "completed");
+                onClick={async () => {
+                  await putTasks(task.id, task.text, "completed");
                   updateStatus(task.id, "completed");
                 }}
               >
