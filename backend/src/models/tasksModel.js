@@ -9,7 +9,7 @@ const createTask = async (task) => {
   const { text } = task;
 
   const query = "INSERT INTO tasks(text, status) VALUES(?, ?)";
-  const [createdTask] = await connection.execute(query, [text, "pendente"]);
+  const [createdTask] = await connection.execute(query, [text, "pending"]);
   return { insertId: createdTask.insertId };
 };
 

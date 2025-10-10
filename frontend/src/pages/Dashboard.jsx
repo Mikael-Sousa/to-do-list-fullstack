@@ -9,7 +9,7 @@ import Modal from "../components/Modal";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("Create a Task");
   const [completed, setCompleted] = useState(0);
   const [total, setTotal] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +29,13 @@ function App() {
     load();
   }, [completed, deleteClicked]);
 
+  const handleUpdateStatus = (taskId, newStatus) => {
+    const updatedTasks = tasks.map((t) =>
+      t.id === taskId ? { ...t, status: newStatus } : t
+    );
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <Navbar />
@@ -36,20 +43,21 @@ function App() {
       <TaskList
         tasks={tasks}
         onModal={(task) => {
-          setTaskSelected(task)
+          setTaskSelected(task);
           setShowModal(true);
         }}
+        updateStatus={handleUpdateStatus}
       />
       {showModal && (
         <Modal
           offModal={() => {
             setShowModal(false);
           }}
-          //
           deleteClick={() => {
-            setDeleteClicked(deleteClicked + 1)
+            setDeleteClicked(deleteClicked + 1);
           }}
           task={taskSelected}
+          updateStatus={handleUpdateStatus}
         />
       )}
     </>

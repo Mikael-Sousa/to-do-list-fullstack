@@ -1,6 +1,7 @@
 import { deleteTasks } from "../hooks/UseAPI";
+import { putTasks } from "../hooks/UseAPI";
 
-function Modal({ offModal, task, deleteClick }) {
+function Modal({ offModal, task, deleteClick, updateStatus }) {
   return (
     <div
       className="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.6)] flex justify-center
@@ -35,6 +36,8 @@ function Modal({ offModal, task, deleteClick }) {
           className="text-white bg-[rgba(109,4,179,0.8)] w-8/10 p-2.5 rounded-2xl
         text-2xl cursor-pointer"
           onClick={() => {
+            putTasks(task.id, task.text, "dayOff");
+            updateStatus(task.id, "dayOff");
             offModal();
           }}
         >
