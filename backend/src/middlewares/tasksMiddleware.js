@@ -26,7 +26,37 @@ const validateStatus = (req, res, next) => {
   next();
 };
 
+const validateDaysPerWeek = (req, res, next) => {
+  const { body } = req;
+
+  if (body.daysPerWeek === undefined) {
+    return res.status(400).json({ message: "daysPerWeek is undefined" });
+  }
+
+  if (body.daysPerWeek === "") {
+    return res.status(400).json({ message: "daysPerWeek is empty" });
+  }
+
+  next();
+};
+
+const validateShift = (req, res, next) => {
+  const { body } = req;
+
+  if (body.shift === undefined) {
+    return res.status(400).json({ message: "shift is undefined" });
+  }
+
+  if (body.shift === "") {
+    return res.status(400).json({ message: "shift is empty" });
+  }
+
+  next();
+};
+
 module.exports = {
   validateText,
   validateStatus,
+  validateDaysPerWeek,
+  validateShift,
 };

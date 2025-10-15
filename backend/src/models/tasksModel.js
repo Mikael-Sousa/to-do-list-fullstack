@@ -6,10 +6,10 @@ const getAll = async () => {
 };
 
 const createTask = async (task) => {
-  const { text } = task;
+  const { text, daysPerWeek, shift } = task;
 
-  const query = "INSERT INTO tasks(text, status) VALUES(?, ?)";
-  const [createdTask] = await connection.execute(query, [text, "pending"]);
+  const query = "INSERT INTO tasks(text, status, daysPerWeek, shift) VALUES(?, ?, ?, ?)";
+  const [createdTask] = await connection.execute(query, [text, "pending", daysPerWeek, shift]);
   return { insertId: createdTask.insertId };
 };
 
@@ -22,9 +22,9 @@ const deteteTask = async (id) => {
 };
 
 const updateTask = async (id, task) => {
-  const query = "UPDATE tasks SET text = ?, status = ? WHERE id = ?";
-  const { text, status } = task;
-  const updatedTask = await connection.execute(query, [text, status, id]);
+  const query = "UPDATE tasks SET text = ?, status = ?, daysPerWeek = ?, shift = ? WHERE id = ?";
+  const { text, status, daysPerWeek, shift } = task;
+  const updatedTask = await connection.execute(query, [text, status, daysPerWeek, shift, id]);
   return updatedTask;
 };
 

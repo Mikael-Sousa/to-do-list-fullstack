@@ -35,7 +35,7 @@ function TaskList({ tasks, onModal, updateStatus }) {
                 className="w-10 h-10 p-1 rounded-full bg-transparent border-2 border-black 
                     cursor-pointer flex justify-center items-center"
                 onClick={async () => {
-                  await putTasks(task.id, task.text, "completed");
+                  await putTasks(task.id, task.text, "completed", task.daysPerWeek, task.shift);
                   updateStatus(task.id, "completed");
                 }}
               >

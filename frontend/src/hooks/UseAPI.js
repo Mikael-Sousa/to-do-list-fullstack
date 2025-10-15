@@ -7,21 +7,21 @@ export const fetchTasks = async () => {
   return ArrayTasks;
 };
 
-export const postTasks = async (text) => {
+export const postTasks = async (text, daysPerWeek, shift) => {
     await fetch("http://localhost:2000/tasks",
       {
         method: "post",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({text}),
+        body: JSON.stringify({text, daysPerWeek, shift}),
       });
   };
 
-export const putTasks = async (id, text, status) => {
+export const putTasks = async (id, text, status, daysPerWeek, shift) => {
     await fetch(`http://localhost:2000/tasks/${id}`,
       {
         method: "put",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({text, status }),
+        body: JSON.stringify({text, status, daysPerWeek, shift }),
       });
   };
 
@@ -31,5 +31,4 @@ export const deleteTasks = async (id) => {
         method: "delete",
         headers: { "Content-Type": "application/json" },
       });
-      fetchTasks()
   };
