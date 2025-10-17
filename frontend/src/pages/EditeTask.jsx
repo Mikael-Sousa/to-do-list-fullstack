@@ -23,11 +23,10 @@ function EditTask() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(daysPerWeek)
 
-    //await putTasks(task.id, text, task.status, daysPerWeek, shift);
+    await putTasks(task.id, text, task.status, daysPerWeek, shift);
 
-    //navigate("/");
+    navigate("/");
   };
 
   if (!task) return null;

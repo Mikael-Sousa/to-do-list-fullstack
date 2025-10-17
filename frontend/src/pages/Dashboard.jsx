@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { fetchTasks } from "../hooks/UseAPI";
+import { fetchTasks, resetTasks } from "../hooks/UseAPI";
 import { messageFunction } from "../utils/TaskCounter";
+import { reset } from "../utils/DailyReset";
 import Navbar from "../components/Navbar";
 import TaskCounter from "../components/TaskCounter";
+import ShiftBar from "../components/ShiftBar";
 import TaskList from "../components/TaskList";
 import Modal from "../components/Modal";
 
@@ -15,6 +17,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [deleteClicked, setDeleteClicked] = useState(0);
   const [taskSelected, setTaskSelected] = useState(null);
+  const [shift, setShift] = useState("anytime");
 
   console.log(setCompleted);
 
@@ -26,6 +29,12 @@ function App() {
       setMessage(messageFunction(data, completed, data.length));
       const completedCount = data.filter((t) => t.status !== "pending").length;
       setCompleted(completedCount);
+      const newTasks = reset(data);
+
+      if (newTasks !== data) {
+      await resetTasks(); 
+      setTasks(newTasks); 
+    }
     };
     load();
   }, [completed, deleteClicked]);
@@ -35,15 +44,17 @@ function App() {
       t.id === taskId ? { ...t, status: newStatus } : t
     );
     setTasks(updatedTasks);
-    const completedCount = updatedTasks.filter((t) => t.status !== "pending").length;
+    const completedCount = updatedTasks.filter(
+      (t) => t.status !== "pending"
+    ).length;
     setCompleted(completedCount);
-
   };
 
   return (
     <>
       <Navbar />
       <TaskCounter message={message} completed={completed} total={total} />
+      <ShiftBar selectedShift={shift} setSelectedShift={setShift} />
       <TaskList
         tasks={tasks}
         onModal={(task) => {
@@ -51,6 +62,7 @@ function App() {
           setShowModal(true);
         }}
         updateStatus={handleUpdateStatus}
+        selectedShift={shift}
       />
       {showModal && (
         <Modal

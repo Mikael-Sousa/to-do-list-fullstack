@@ -11,7 +11,7 @@ function TaskCounter({ message, completed, total }) {
         flex bg-[rgba(0,0,0,0.2)] w-full p-7 rounded-3xl justify-around
         items-center"
         >
-          <h3 className="caret-cyan-50">{message}</h3>
+          <h3 className="text-cyan-50 text-2xl">{message}</h3>
           <div className="text-cyan-50 bg-[rgba(0,0,0,0.6)] rounded-4xl py-5 px-2.5">
             <p className="numbers">
               {completed} / {total}
@@ -20,7 +20,7 @@ function TaskCounter({ message, completed, total }) {
         </div>
         <button
           className="
-      w-15 h-15 flex items-center justify-center bg-[rgba(0,0,0,0.6)]
+      w-15 h-15 flex items-center justify-center bg-[rgba(0,0,0,0.6)] text-cyan-50
       rounded-full"
           onClick={() => navigate("/create-task")}
         >

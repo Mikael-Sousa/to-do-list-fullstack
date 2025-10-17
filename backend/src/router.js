@@ -13,6 +13,7 @@ router.post(
   tasksController.createTask
 );
 router.delete("/tasks/:id", tasksController.deleteTask);
+router.put("/tasks/reset", tasksController.resetTasks)
 router.put(
   "/tasks/:id",
   tasksMiddleware.validateText,
@@ -21,5 +22,4 @@ router.put(
   tasksMiddleware.validateShift,
   tasksController.updateTask
 );
-
 module.exports = router;

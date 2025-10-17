@@ -12,7 +12,7 @@ const createTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   const { id } = req.params;
-  await tasksModel.deteteTask(id);
+  await tasksModel.deleteTask(id);
   return res.status(204).json();
 };
 
@@ -22,9 +22,16 @@ const updateTask = async (req, res) => {
   return res.status(204).json();
 };
 
+const resetTasks = async (_req, res) => {
+  await tasksModel.resetTasks();
+  return res.status(204).end();
+};
+
+
 module.exports = {
   getAll,
   createTask,
   deleteTask,
   updateTask,
+  resetTasks,
 };
