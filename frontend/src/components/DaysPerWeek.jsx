@@ -24,8 +24,8 @@ const DaysPerWeek = ( {selectedDay, setSelectedDay} ) => {
               name="opcao"
               value={value}
               checked={selectedDay === value}
-              onChange={(e) => setSelectedDay(e.target.value)}
-              className="hidden peer"
+              onChange={(e) => setSelectedDay(Number(e.target.value))}
+              className="sr-only peer"
             />
             <span
               className="

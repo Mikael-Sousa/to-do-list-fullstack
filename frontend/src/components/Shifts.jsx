@@ -26,7 +26,7 @@ const Shifts = ( {selectedShift, setSelectedShift} ) => {
               value={value}
               checked={selectedShift === value}
               onChange={(e) => setSelectedShift(e.target.value)}
-              className="hidden peer"
+              className="sr-only peer"
             />
             <span
               className="

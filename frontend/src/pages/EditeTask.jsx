@@ -15,11 +15,12 @@ function EditTask() {
   const [daysPerWeek, setDaysPerWeek] = useState(task?.daysPerWeek || 7);
   const [shift, setShift] = useState(task?.shift || "anytime");
 
-  useEffect(() => {
-    if (!task) {
-      navigate("/");
-    }
-  }, [task, navigate]);
+useEffect(() => {
+  if (task) {
+    setShift(task.shift); 
+    setDaysPerWeek(task.daysPerWeek);
+  }
+}, [task]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

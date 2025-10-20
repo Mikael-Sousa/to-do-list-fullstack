@@ -37,7 +37,7 @@ function App() {
     }
     };
     load();
-  }, [completed, deleteClicked]);
+  }, [tasks, completed, deleteClicked]);
 
   const handleUpdateStatus = (taskId, newStatus) => {
     const updatedTasks = tasks.map((t) =>
