@@ -22,10 +22,15 @@ const updateTask = async (req, res) => {
   return res.status(204).json();
 };
 
-const resetTasks = async (_req, res) => {
-  await tasksModel.resetTasks();
+const resetDailyTasks = async (_req, res) => {
+  await tasksModel.resetDailyTasks();
   return res.status(204).end();
 };
+
+const resetWeeklyTasks = async (_req, res) => {
+  await tasksModel.resetWeeklyTasks();
+  return res.status(204).end();
+}
 
 
 module.exports = {
@@ -33,5 +38,6 @@ module.exports = {
   createTask,
   deleteTask,
   updateTask,
-  resetTasks,
+  resetDailyTasks,
+  resetWeeklyTasks,
 };

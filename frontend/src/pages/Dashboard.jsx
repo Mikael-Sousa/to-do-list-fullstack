@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { fetchTasks, resetTasks } from "../hooks/UseAPI";
+import { fetchTasks, resetDailyTasks, resetWeeklyTasks } from "../hooks/UseAPI";
 import { messageFunction } from "../utils/TaskCounter";
-import { reset } from "../utils/DailyReset";
+import { dailyReset } from "../utils/DailyReset";
+import { weeklyReset } from "../utils/WeeklyReset";
 import Navbar from "../components/Navbar";
 import TaskCounter from "../components/TaskCounter";
 import ShiftBar from "../components/ShiftBar";
@@ -20,24 +21,43 @@ function App() {
   const [shift, setShift] = useState("anytime");
 
   console.log(setCompleted);
+  useEffect(() => {
+    const loadTasks = async () => {
+      const data = await fetchTasks();
+      const newDailyTasks = dailyReset(data);
+
+      if (newDailyTasks !== data) {
+        await resetDailyTasks();
+        setTasks(newDailyTasks);
+      } else {
+        setTasks(data);
+      }
+
+      const newWeeklyTasks = weeklyReset(data);
+
+      if (newWeeklyTasks !== data) {
+        await resetWeeklyTasks();
+        setTasks(newWeeklyTasks);
+      } else {
+        setTasks(data);
+      }
+    };
+
+    loadTasks();
+  }, [deleteClicked]);
 
   useEffect(() => {
-    const load = async () => {
-      const data = await fetchTasks();
-      setTasks(data);
-      setTotal(data.length);
-      setMessage(messageFunction(data, completed, data.length));
-      const completedCount = data.filter((t) => t.status !== "pending").length;
-      setCompleted(completedCount);
-      const newTasks = reset(data);
+    const totalCount = tasks.filter(
+      (t) => t.daysPerWeek !== t.weeklyCount
+    ).length;
+    const completedCount = tasks.filter(
+      (t) => t.status !== "pending" && t.daysPerWeek !== t.weeklyCount
+    ).length;
 
-      if (newTasks !== data) {
-      await resetTasks(); 
-      setTasks(newTasks); 
-    }
-    };
-    load();
-  }, [tasks, completed, deleteClicked]);
+    setTotal(totalCount);
+    setCompleted(completedCount);
+    setMessage(messageFunction(tasks, completedCount, totalCount));
+  }, [tasks]);
 
   const handleUpdateStatus = (taskId, newStatus) => {
     const updatedTasks = tasks.map((t) =>

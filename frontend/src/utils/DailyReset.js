@@ -1,4 +1,4 @@
-export const reset = (tasks) => {
+export const dailyReset = (tasks) => {
   const now = new Date();
   const hour =  now.getHours();
   const today = now.toISOString().split("T")[0];

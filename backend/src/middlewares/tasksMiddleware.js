@@ -54,9 +54,24 @@ const validateShift = (req, res, next) => {
   next();
 };
 
+const validateWeeklyCount = (req, res, next) => {
+  const { body } = req;
+
+  if (body.weeklyCount === undefined) {
+    return res.status(400).json({ message: "weeklyCount is undefined" });
+  }
+
+  if (body.weeklyCount === "") {
+    return res.status(400).json({ message: "weeklyCount is empty" });
+  }
+
+  next();
+};
+
 module.exports = {
   validateText,
   validateStatus,
   validateDaysPerWeek,
   validateShift,
+  validateWeeklyCount,
 };

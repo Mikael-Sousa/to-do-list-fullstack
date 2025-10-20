@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { deleteTasks } from "../hooks/UseAPI";
 import { putTasks } from "../hooks/UseAPI";
-import DaysPerWeek from "./DaysPerWeek";
 
 function Modal({ offModal, task, deleteClick, updateStatus }) {
   const navigate = useNavigate();
@@ -43,12 +42,14 @@ function Modal({ offModal, task, deleteClick, updateStatus }) {
           className="text-white bg-[rgba(109,4,179,0.8)] w-8/10 p-2.5 rounded-2xl
         text-2xl cursor-pointer"
           onClick={async () => {
+            const updatedWeeklyCount = task.weeklyCount + 1;
             await putTasks(
               task.id,
               task.text,
-              "dayOff",
+              "completed",
               task.daysPerWeek,
-              task.shift
+              task.shift,
+              updatedWeeklyCount
             );
             updateStatus(task.id, "dayOff");
             offModal();

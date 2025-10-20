@@ -13,13 +13,15 @@ router.post(
   tasksController.createTask
 );
 router.delete("/tasks/:id", tasksController.deleteTask);
-router.put("/tasks/reset", tasksController.resetTasks)
+router.put("/tasks/daily-reset", tasksController.resetDailyTasks);
+router.put("/tasks/weekly-reset", tasksController.resetWeeklyTasks)
 router.put(
   "/tasks/:id",
   tasksMiddleware.validateText,
   tasksMiddleware.validateStatus,
   tasksMiddleware.validateDaysPerWeek,
   tasksMiddleware.validateShift,
+  tasksMiddleware.validateWeeklyCount,
   tasksController.updateTask
 );
 module.exports = router;

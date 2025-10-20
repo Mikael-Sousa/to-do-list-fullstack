@@ -10,12 +10,13 @@ const getAll = async () => {
 const createTask = async (task) => {
   const { text, daysPerWeek, shift } = task;
   const query =
-    "INSERT INTO tasks(text, status, daysPerWeek, shift) VALUES(?, ?, ?, ?)";
+    "INSERT INTO tasks(text, status, daysPerWeek, shift, weeklyCount) VALUES(?, ?, ?, ?, ?)";
   const [createdTask] = await connection.execute(query, [
     text,
     "pending",
     daysPerWeek,
     shift,
+    0,
   ]);
   return { insertId: createdTask.insertId };
 };
@@ -30,23 +31,31 @@ const deleteTask = async (id) => {
 
 const updateTask = async (id, task) => {
   const query =
-    "UPDATE tasks SET text = ?, status = ?, daysPerWeek = ?, shift = ? WHERE id = ?";
-  const { text, status, daysPerWeek, shift } = task;
+    "UPDATE tasks SET text = ?, status = ?, daysPerWeek = ?, shift = ?, weeklyCount = ? WHERE id = ?";
+  const { text, status, daysPerWeek, shift, weeklyCount } = task;
   const updatedTask = await connection.execute(query, [
     text,
     status,
     daysPerWeek,
     shift,
+    weeklyCount,
     id,
   ]);
   return updatedTask;
 };
 
-const resetTasks = async () => {
+const resetDailyTasks = async () => {
   const resetedTasks = await connection.execute(
     "UPDATE tasks SET status = 'pending' WHERE status IN ('completed','dayOff')"
   );
   return resetedTasks;
+};
+
+const resetWeeklyTasks = async () => {
+  const result = await connection.execute(
+    "UPDATE tasks SET weeklyCount = 0"
+  );
+  return result;
 };
 
 module.exports = {
@@ -54,5 +63,6 @@ module.exports = {
   createTask,
   deleteTask,
   updateTask,
-  resetTasks,
+  resetDailyTasks,
+  resetWeeklyTasks,
 };
