@@ -4,6 +4,7 @@ import { fetchTasks, resetDailyTasks, resetWeeklyTasks } from "../hooks/UseAPI";
 import { messageFunction } from "../utils/TaskCounter";
 import { dailyReset } from "../utils/DailyReset";
 import { weeklyReset } from "../utils/WeeklyReset";
+import { shiftChecker } from "../utils/ShiftChecker";
 import Navbar from "../components/Navbar";
 import TaskCounter from "../components/TaskCounter";
 import ShiftBar from "../components/ShiftBar";
@@ -43,8 +44,14 @@ function App() {
       }
     };
 
+    const period = shiftChecker()
+
+    if (period !== shift) {
+      setShift(period)
+    }
+
     loadTasks();
-  }, [deleteClicked]);
+  }, []);
 
   useEffect(() => {
     const totalCount = tasks.filter(

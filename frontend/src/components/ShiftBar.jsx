@@ -31,7 +31,7 @@ const Shifts = ( {selectedShift, setSelectedShift} ) => {
                 peer-checked:text-white
               "
             >
-              {value}
+              {value === "anytime"? <span>all</span>:<span>{value}</span>}
             </span>
           </label>
         ))}
