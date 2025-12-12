@@ -51,7 +51,7 @@ function App() {
     }
 
     loadTasks();
-  }, []);
+  }, [deleteClicked]);
 
   useEffect(() => {
     const totalCount = tasks.filter(

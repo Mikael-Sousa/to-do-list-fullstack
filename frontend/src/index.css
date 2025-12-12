@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* ============
+   DESKTOP (padrão)
+   ============ */
 body {
   background-image: url("./assets/cenario.jpg");
   background-size: cover;
@@ -11,7 +14,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px;
+  padding: 100px; /* PC */
 }
 
 #root {
@@ -22,7 +25,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 50%;
+  width: 50%; /* PC */
   min-height: 400px;
   padding: 15px;
   border-radius: 15px;
@@ -32,4 +35,26 @@ body {
   overflow-y: auto;
   max-height: calc(100vh - 60px);
   margin: 0 auto;
+}
+
+/* ============================
+   MOBILE (até 767px)
+   ============================ */
+@media (max-width: 767px) {
+
+  body {
+    padding: 20px;       /* caber na tela */
+    justify-content: flex-start; /* não forçar centro vertical */
+    align-items: stretch;
+  }
+
+  #root {
+    width: 100%;         /* ocupar a tela inteira */
+    padding: 20px;
+    max-height: none;    /* liberar scroll normal */
+    min-height: auto;
+    background-color: rgba(0, 0, 0, 0.35); /* mais legível */
+    margin-top: 60px;
+    min-height: calc(100dvh - 60px);
+  }
 }

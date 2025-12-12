@@ -1,11 +1,11 @@
 import Navbar from "../components/Navbar";
 
-function Goals() {
+function About() {
   return (
   <>
   <Navbar />
-  <h1>Criar Tarefa</h1>
+  <h1>about</h1>
   </>)
 }
 
-export default Goals;
+export default About;

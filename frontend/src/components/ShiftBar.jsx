@@ -23,7 +23,7 @@ const Shifts = ( {selectedShift, setSelectedShift} ) => {
             />
             <span
               className="
-                flex items-center justify-center p-4
+                flex items-center justify-center min-w-30 p-4
                 rounded-xl border-2 border-black
                 bg-black/60 text-white font-[Caprasimo] text-base
                 transition-all duration-300 ease-in-out
