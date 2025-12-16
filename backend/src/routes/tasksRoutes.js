@@ -1,10 +1,13 @@
 const express = require("express");
-const tasksController = require("./controllers/tasksController");
-const tasksMiddleware = require("./middlewares/tasksMiddleware");
+const tasksController = require("../controllers/tasksController");
+const tasksMiddleware = require("../middlewares/tasksMiddleware");
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.get("/tasks", tasksController.getAll);
+router.use(authMiddleware)
+
+router.get("/", tasksController.getAll);
 router.post(
   "/tasks",
   tasksMiddleware.validateText,
@@ -12,11 +15,11 @@ router.post(
   tasksMiddleware.validateShift,
   tasksController.createTask
 );
-router.delete("/tasks/:id", tasksController.deleteTask);
-router.put("/tasks/daily-reset", tasksController.resetDailyTasks);
-router.put("/tasks/weekly-reset", tasksController.resetWeeklyTasks)
+router.delete("/:id", tasksController.deleteTask);
+router.put("/daily-reset", tasksController.resetDailyTasks);
+router.put("/weekly-reset", tasksController.resetWeeklyTasks)
 router.put(
-  "/tasks/:id",
+  "/:id",
   tasksMiddleware.validateText,
   tasksMiddleware.validateStatus,
   tasksMiddleware.validateDaysPerWeek,

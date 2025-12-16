@@ -1,68 +1,68 @@
 const validateText = (req, res, next) => {
-  const { body } = req;
+  const { text } = req.body;
 
-  if (body.text === undefined) {
-    return res.status(400).json({ message: "text is undefined" });
+  if (text === undefined) {
+    return res.status(400).json({ message: "text is required" });
   }
 
-  if (body.text === "") {
-    return res.status(400).json({ message: "text is empty" });
+  if (text.trim() === "") {
+    return res.status(400).json({ message: "text cannot be empty" });
   }
 
   next();
 };
 
 const validateStatus = (req, res, next) => {
-  const { body } = req;
+  const { status } = req.body;
 
-  if (body.status === undefined) {
-    return res.status(400).json({ message: "status is undefined" });
+  if (status === undefined) {
+    return res.status(400).json({ message: "status is required" });
   }
 
-  if (body.status === "") {
-    return res.status(400).json({ message: "status is empty" });
+  if (status.trim() === "") {
+    return res.status(400).json({ message: "status cannot be empty" });
   }
 
   next();
 };
 
 const validateDaysPerWeek = (req, res, next) => {
-  const { body } = req;
+  const { daysPerWeek } = req.body;
 
-  if (body.daysPerWeek === undefined) {
-    return res.status(400).json({ message: "daysPerWeek is undefined" });
+  if (daysPerWeek === undefined) {
+    return res.status(400).json({ message: "daysPerWeek is required" });
   }
 
-  if (body.daysPerWeek === "") {
-    return res.status(400).json({ message: "daysPerWeek is empty" });
+  if (typeof daysPerWeek !== "number") {
+    return res.status(400).json({ message: "daysPerWeek must be a number" });
   }
 
   next();
 };
 
 const validateShift = (req, res, next) => {
-  const { body } = req;
+  const { shift } = req.body;
 
-  if (body.shift === undefined) {
-    return res.status(400).json({ message: "shift is undefined" });
+  if (shift === undefined) {
+    return res.status(400).json({ message: "shift is required" });
   }
 
-  if (body.shift === "") {
-    return res.status(400).json({ message: "shift is empty" });
+  if (shift.trim() === "") {
+    return res.status(400).json({ message: "shift cannot be empty" });
   }
 
   next();
 };
 
 const validateWeeklyCount = (req, res, next) => {
-  const { body } = req;
+  const { weeklyCount } = req.body;
 
-  if (body.weeklyCount === undefined) {
-    return res.status(400).json({ message: "weeklyCount is undefined" });
+  if (weeklyCount === undefined) {
+    return res.status(400).json({ message: "weeklyCount is required" });
   }
 
-  if (body.weeklyCount === "") {
-    return res.status(400).json({ message: "weeklyCount is empty" });
+  if (typeof weeklyCount !== "number") {
+    return res.status(400).json({ message: "weeklyCount must be a number" });
   }
 
   next();
