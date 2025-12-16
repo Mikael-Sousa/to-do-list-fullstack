@@ -8,4 +8,15 @@ const findByEmail = async (email) => {
   return rows[0];
 };
 
-module.exports = { findByEmail };
+const registerNewUser = async ( username, email, password) => {
+  const [registeredUser] = await connection.execute(
+    'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+    [username, email, password]
+  );
+  return { insertId: registeredUser.insertId};
+}
+
+module.exports = {
+  findByEmail,
+  registerNewUser
+};

@@ -9,7 +9,7 @@ router.use(authMiddleware)
 
 router.get("/", tasksController.getAll);
 router.post(
-  "/tasks",
+  "/post",
   tasksMiddleware.validateText,
   tasksMiddleware.validateDaysPerWeek,
   tasksMiddleware.validateShift,
